@@ -62,6 +62,29 @@ dialog::backdrop { background: #000b; backdrop-filter: blur(3px); }
 .rules-content { padding: 24px; font: 1rem/1.65 system-ui, sans-serif; }
 .rules-content h3 { margin-top: 26px; color: var(--gold-2); font-family: Georgia, serif; }
 .rules-content li { margin-bottom: 9px; }
+.board-scroll { overflow:auto; max-height:78vh; }
+.board { width:100%; }
+.cell { min-height:0; min-width:0; border-radius:0; aspect-ratio:1; padding:0; }
+.cell .piece { position:relative; z-index:3; font-family:'DejaVu Sans','Segoe UI Symbol','Arial Unicode MS',serif; font-size:clamp(1.5rem,4vw,3rem); line-height:1; }
+.piece.w {color:#fff7df;text-shadow:1px 1px 0 #21190f,-1px -1px 0 #21190f,0 2px 3px #0009;}
+.piece.b {color:#141c27;text-shadow:1px 1px 0 #ffffffa0,-1px -1px 0 #ffffffa0;}
+.piece.neutral {color:#d69e31;text-shadow:1px 1px #111;}
+.piece.asleep {transform:rotate(70deg);opacity:.8;}
+.cell.selected {outline:4px solid #fff16a;outline-offset:-4px;z-index:4;}
+.cell .mine {position:absolute;z-index:4;color:#ffe263;font-size:1.5rem;text-shadow:1px 1px #000;}
+.cell .coord {bottom:1px;right:2px;font-size:12px;color:#222;}
+.cell.out .coord {color:#bba98e;}
+.castle-tag {position:absolute;top:1px;right:2px;z-index:4;font:700 12px system-ui;color:white;background:#171717;}
+.toolbar {display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.toolbar button {flex:1;font:14px system-ui;}
+button:disabled {opacity:.4;cursor:default;filter:none;}
+#status {font:1rem/1.5 system-ui;min-height:3em;}
+.small,#lastMove,#score {font:14px/1.6 system-ui;color:#c1b5a2;}
+.controls section>button {width:100%;margin-bottom:8px;}
+#log {max-height:220px;overflow:auto;margin:0;padding-left:20px;font:14px/1.6 system-ui;color:#c1b5a2;}
+#log li {margin-bottom:8px;}
+select {width:100%;font:1rem system-ui;padding:12px;margin:12px 0 20px;background:#29231b;color:var(--ink);border:1px solid #776345;}
+a {color:var(--gold-2);}
 @media (max-width: 840px) {
   header { padding: 18px 14px 10px; }
   main { grid-template-columns: 1fr; padding: 8px 12px 28px; }

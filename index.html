@@ -1,101 +1,41 @@
 <!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#15120f">
-  <title>Échecs à la Troll</title>
-  <meta name="description" content="Compagnon de plateau pour jouer aux Échecs avancés trolls à deux.">
-  <link rel="stylesheet" href="style.css">
-</head>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#15120f"><title>Échecs à la Troll — Deux joueurs</title><meta name="description" content="Échecs trolls à deux sur le même écran. Pièces, captures, mines et accusations."><link rel="stylesheet" href="style.css?v=2"></head>
 <body>
-  <header>
-    <div>
-      <p class="eyebrow">11e édition des Échecs avancés trolls</p>
-      <h1>Échecs à la Troll</h1>
-    </div>
-    <button id="rulesBtn" class="secondary">Livre des règles</button>
-  </header>
-
-  <main>
-    <section class="game-panel">
-      <div class="status-row">
-        <div><span class="status-dot"></span><strong id="status">Partie prête</strong></div>
-        <span id="counter">0/4 cases révélées</span>
-      </div>
-
-      <div class="board-wrap">
-        <div id="board" class="board" aria-label="Plateau auxiliaire interactif"></div>
-      </div>
-
-      <p id="hint" class="hint">Touchez une case pour savoir si elle est glissante.</p>
-    </section>
-
-    <aside class="controls">
-      <section>
-        <h2>Action</h2>
-        <div class="mode-grid" role="group" aria-label="Action choisie">
-          <button class="mode active" data-mode="inspect"><span>◉</span> Tester une case</button>
-          <button class="mode" data-mode="gift"><span>✦</span> Poser une mine</button>
-          <button class="mode" data-mode="white-bishop"><span>♗</span> Fou blanc dehors</button>
-          <button class="mode" data-mode="black-bishop"><span>♝</span> Fou noir dehors</button>
-        </div>
-      </section>
-
-      <section class="legend">
-        <h2>Légende</h2>
-        <p><i class="swatch slippery"></i> Case glissante révélée</p>
-        <p><i class="swatch gift"></i> Cadeau de connaissance / mine</p>
-        <p><i class="swatch outside"></i> Zone extérieure réservée aux fous</p>
-      </section>
-
-      <section class="actions">
-        <button id="mirrorBtn">↔ Retourner horizontalement</button>
-        <button id="undoBtn" class="secondary">↶ Annuler</button>
-        <button id="newBtn" class="danger">Nouvelle partie</button>
-      </section>
-    </aside>
-  </main>
-
-  <dialog id="rulesDialog">
-    <div class="dialog-head">
-      <div><p class="eyebrow">Règlement de table</p><h2>Livre des règles</h2></div>
-      <button id="closeRules" class="icon" aria-label="Fermer">×</button>
-    </div>
-    <div class="rules-content">
-      <p><strong>But :</strong> les Noirs gagnent en capturant le roi blanc. Quand le roi noir est capturé, une pièce noire restante tirée au hasard devient le nouveau roi. Les Blancs gagnent lorsque le roi noir est capturé sans qu'il reste de pièce noire.</p>
-      <h3>Tricher et accuser</h3>
-      <ol>
-        <li>Une accusation se fait juste après le coup suspect, avant le coup suivant, en nommant la pièce et la règle enfreinte.</li>
-        <li>Accusation correcte : l'accusateur peut déplacer une pièce ou une mine n'importe où lors de son tour de vengeance.</li>
-        <li>Accusation fausse : l'accusateur passe son tour et l'adversaire obtient la vengeance.</li>
-        <li>Une tricherie non dénoncée à temps demeure valable.</li>
-      </ol>
-      <h3>Déplacements</h3>
-      <ol start="5">
-        <li>Les pions avancent ou capturent d'une case vers l'avant, l'arrière, la gauche ou la droite. Jamais en diagonale et jamais de deux cases.</li>
-        <li>Le cavalier se déplace normalement et lui seul saute par-dessus les pièces.</li>
-        <li>Le roi se déplace d'une case dans toutes les directions. Il n'y a ni annonce d'échec ni échec et mat : il faut capturer le roi.</li>
-        <li>La tour se déplace normalement. Elle peut aussi capturer une pièce de sa propre couleur.</li>
-        <li>Le fou se déplace normalement, mais peut prolonger ses diagonales hors du plateau et revenir ensuite.</li>
-        <li>La dame se déplace normalement. Chaque joueur est autorisé à déplacer la dame adverse.</li>
-      </ol>
-      <h3>Règles spéciales</h3>
-      <ol start="11">
-        <li>Un pion atteignant la dernière rangée s'élève : il disparaît sans promotion.</li>
-        <li>Après chaque déplacement, un fou laisse une mine sur la case quittée. Une pièce terminant sur une mine est détruite avec elle. Les mines peuvent être traversées mais pas déplacées.</li>
-        <li>Quand une dame capture, toute la position est reflétée horizontalement.</li>
-        <li>Deux tours orthogonalement adjacentes fusionnent immédiatement en château. Celui-ci est immobile, sauf s'il reste au moins trois tours ordinaires.</li>
-        <li>Seuls les fous peuvent sortir du plateau pendant un coup légal.</li>
-        <li>Une seule pièce peut occuper une case.</li>
-        <li>Une dame ne peut pas capturer le roi adverse, sauf avec un coup de vengeance.</li>
-        <li>Quatre cases des rangées centrales sont secrètement glissantes. Une pièce qui s'y arrête tombe ; la relever consomme un tour complet.</li>
-      </ol>
-      <h3>Utilisation de cet outil</h3>
-      <p>Le plateau numérique accompagne votre véritable échiquier. Testez ici la case d'arrivée d'une pièce. Utilisez les autres modes pour mémoriser les mines et les fous sortis du plateau. Toutes les modifications sont conservées automatiquement sur cet appareil.</p>
-    </div>
-  </dialog>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<header><div><p class="eyebrow">Deux joueurs · même écran · version 2</p><h1>Échecs à la Troll</h1></div><button id="rulesBtn" class="secondary">Règles & aide</button></header>
+<main>
+ <section class="game-panel">
+  <div class="status-row"><strong id="turn"></strong><span id="counter"></span></div>
+  <p id="status" role="status" aria-live="polite">Cliquez une pièce, puis sa destination. Les coups illégaux ne sont pas bloqués : surveillez votre adversaire !</p>
+  <div class="board-scroll"><div id="board" class="board" aria-label="Échiquier et zone extérieure"></div></div>
+  <p id="selection" class="hint">Sélectionnez une pièce.</p>
+  <div class="toolbar"><button id="wakeBtn" class="secondary">Relever la pièce</button><button id="cancelBtn" class="secondary">Désélectionner</button><button id="expandBtn" class="secondary">Agrandir l’extérieur</button></div>
+ </section>
+ <aside class="controls">
+  <section><h2>Le dernier coup</h2><p id="lastMove">Les Blancs commencent.</p><button id="accuseBtn" class="danger">Accuser de triche</button><button id="acceptBtn" class="secondary">Accepter le coup</button><p class="small">Jouer votre prochain coup accepte aussi le précédent. Un coup de vengeance ne peut pas être contesté.</p></section>
+  <section><h2>Sur le plateau</h2><p class="small">✦ Mine : détruit la pièce qui s’y arrête.<br>❄ Glace : la pièce tombe.<br>Une pièce inclinée doit être relevée.<br>♜ Château marqué C : obstacle neutre.</p><p id="score"></p></section>
+  <section class="actions"><button id="undoBtn" class="secondary">Annuler (accord des deux)</button><button id="newBtn" class="danger">Nouvelle partie</button><p id="saveStatus" class="small">Sauvegarde automatique sur cet appareil.</p></section>
+  <section><h2>Historique</h2><ol id="log"></ol></section>
+ </aside>
+</main>
+<dialog id="accuseDialog"><div class="dialog-head"><h2>Quelle règle a été enfreinte ?</h2><button class="icon" data-close="accuseDialog" aria-label="Fermer">×</button></div><div class="rules-content"><p>L’accusation porte sur la pièce ou la mine du dernier coup. Choisissez la règle : une erreur fait perdre votre tour et donne une vengeance à l’adversaire.</p><label for="ruleSelect">Règle contestée</label><select id="ruleSelect"></select><button id="confirmAccuse">Confirmer l’accusation</button></div></dialog>
+<dialog id="rulesDialog"><div class="dialog-head"><h2>Règles & aide</h2><button class="icon" data-close="rulesDialog" aria-label="Fermer">×</button></div><div class="rules-content">
+<p><strong>Adaptation locale inspirée de King of the Bridge, non officielle.</strong> Pas de jeu original à installer, pas d’IA : deux personnes jouent sur cet écran. Tous les mouvements se font en deux clics : départ, puis arrivée. Un second clic sur la même pièce annule la sélection. Pour changer de sélection sans jouer, utilisez Désélectionner.</p>
+<h3>Triche et vengeance</h3><p>Les déplacements irréguliers sont exécutés sans avertissement. Avant de jouer, l’adversaire peut accuser la pièce du dernier coup en désignant une règle. Si elle a été enfreinte, il gagne une vengeance : un déplacement libre d’une pièce ou d’une mine, de n’importe quelle couleur. Sinon, il perd son tour et l’autre joueur gagne la vengeance. Jouer, relever une pièce ou accepter clôt l’accusation précédente. La vengeance ne peut pas être contestée.</p>
+<h3>Pièces</h3><ul>
+<li><strong>Pion :</strong> une case vers l’avant, l’arrière ou les côtés, captures comprises. Aucun double pas ni prise en passant. Dernière rangée opposée : disparition sans promotion.</li>
+<li><strong>Cavalier :</strong> déplacement en L (2+1), seul à franchir des pièces.</li>
+<li><strong>Fou :</strong> diagonales, y compris à l’extérieur. Une mine apparaît sur la case quittée.</li>
+<li><strong>Tour :</strong> lignes et colonnes ; peut aussi manger ses propres pièces.</li>
+<li><strong>Dame :</strong> lignes, colonnes et diagonales. Chacun peut déplacer la dame adverse, mais elle conserve sa couleur : seule une tour peut manger une pièce de sa propre couleur. Une dame ne peut capturer le roi de l’autre couleur sans enfreindre la règle 29. Une capture par une dame reflète horizontalement pièces, mines et glace.</li>
+<li><strong>Roi :</strong> une case dans toutes les directions. Pas de roque, d’échec ni de mat ; on capture le roi.</li></ul>
+<h3>Victoire asymétrique</h3><p>Capturer le roi blanc fait gagner les Noirs. À la mort du roi noir, une pièce noire restante est tirée au sort et transformée en roi. S’il n’en reste aucune, les Blancs gagnent. La victoire attend l’acceptation du dernier coup.</p>
+<h3>Mines et glace</h3><p>Les mines sont immobiles sauf triche ou vengeance. Les pièces peuvent les traverser, mais une arrivée dessus détruit la pièce et la mine. Quatre cases secrètes sont tirées dans les rangées 3 à 6. Une pièce qui s’y arrête se couche et ne doit plus bouger avant d’être relevée : sélectionnez-la puis cliquez Relever, ce qui utilise le tour. On peut la capturer même couchée.</p>
+<h3>Conventions de cette adaptation</h3><p>Ces choix rendent cette version arbitrable à deux ; ils ne prétendent pas reproduire exactement le moteur original :</p><ul>
+<li>Deux tours orthogonalement voisines, quelle que soit leur couleur, fusionnent sur la case d’arrivée en château neutre immobile. Ce château peut être capturé, ne reçoit jamais la couronne et ne produit pas de monnaie. Aucun mouvement légal de château n’est défini.</li>
+<li>Une capture terminale illégale correctement dénoncée est annulée avant la vengeance, afin de ne pas perdre avant de pouvoir accuser. Les autres coups dénoncés restent en place.</li>
+<li>L’ascension des huit pions blancs donne une victoire alternative. Les autres fins narratives et le canard sont absents.</li>
+<li>La zone extérieure s’étend avec les pièces ; Agrandir l’extérieur ouvre davantage de cases. Toute pièce transformée en roi perd son ancien mouvement.</li>
+<li>Annuler est une aide commune : utilisez-la avec l’accord des deux joueurs, pas pour explorer secrètement la glace. Une partie bloquée peut être recommencée d’un commun accord.</li></ul>
+<p>Références : <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3198178425" target="_blank" rel="noopener">livre communautaire</a> et <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3179617336" target="_blank" rel="noopener">guide des mécaniques</a>. Certaines formulations précédemment données dans la conversation étaient trop affirmatives ; les conventions ci-dessus font foi pour ce site.</p>
+</div></dialog>
+<script src="engine.js?v=2"></script><script src="app.js?v=2"></script></body></html>
