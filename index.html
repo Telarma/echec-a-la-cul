@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15120f">
+  <title>Échecs à la Troll</title>
+  <meta name="description" content="Compagnon de plateau pour jouer aux Échecs avancés trolls à deux.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">11e édition des Échecs avancés trolls</p>
+      <h1>Échecs à la Troll</h1>
+    </div>
+    <button id="rulesBtn" class="secondary">Livre des règles</button>
+  </header>
+
+  <main>
+    <section class="game-panel">
+      <div class="status-row">
+        <div><span class="status-dot"></span><strong id="status">Partie prête</strong></div>
+        <span id="counter">0/4 cases révélées</span>
+      </div>
+
+      <div class="board-wrap">
+        <div id="board" class="board" aria-label="Plateau auxiliaire interactif"></div>
+      </div>
+
+      <p id="hint" class="hint">Touchez une case pour savoir si elle est glissante.</p>
+    </section>
+
+    <aside class="controls">
+      <section>
+        <h2>Action</h2>
+        <div class="mode-grid" role="group" aria-label="Action choisie">
+          <button class="mode active" data-mode="inspect"><span>◉</span> Tester une case</button>
+          <button class="mode" data-mode="gift"><span>✦</span> Poser une mine</button>
+          <button class="mode" data-mode="white-bishop"><span>♗</span> Fou blanc dehors</button>
+          <button class="mode" data-mode="black-bishop"><span>♝</span> Fou noir dehors</button>
+        </div>
+      </section>
+
+      <section class="legend">
+        <h2>Légende</h2>
+        <p><i class="swatch slippery"></i> Case glissante révélée</p>
+        <p><i class="swatch gift"></i> Cadeau de connaissance / mine</p>
+        <p><i class="swatch outside"></i> Zone extérieure réservée aux fous</p>
+      </section>
+
+      <section class="actions">
+        <button id="mirrorBtn">↔ Retourner horizontalement</button>
+        <button id="undoBtn" class="secondary">↶ Annuler</button>
+        <button id="newBtn" class="danger">Nouvelle partie</button>
+      </section>
+    </aside>
+  </main>
+
+  <dialog id="rulesDialog">
+    <div class="dialog-head">
+      <div><p class="eyebrow">Règlement de table</p><h2>Livre des règles</h2></div>
+      <button id="closeRules" class="icon" aria-label="Fermer">×</button>
+    </div>
+    <div class="rules-content">
+      <p><strong>But :</strong> les Noirs gagnent en capturant le roi blanc. Quand le roi noir est capturé, une pièce noire restante tirée au hasard devient le nouveau roi. Les Blancs gagnent lorsque le roi noir est capturé sans qu'il reste de pièce noire.</p>
+      <h3>Tricher et accuser</h3>
+      <ol>
+        <li>Une accusation se fait juste après le coup suspect, avant le coup suivant, en nommant la pièce et la règle enfreinte.</li>
+        <li>Accusation correcte : l'accusateur peut déplacer une pièce ou une mine n'importe où lors de son tour de vengeance.</li>
+        <li>Accusation fausse : l'accusateur passe son tour et l'adversaire obtient la vengeance.</li>
+        <li>Une tricherie non dénoncée à temps demeure valable.</li>
+      </ol>
+      <h3>Déplacements</h3>
+      <ol start="5">
+        <li>Les pions avancent ou capturent d'une case vers l'avant, l'arrière, la gauche ou la droite. Jamais en diagonale et jamais de deux cases.</li>
+        <li>Le cavalier se déplace normalement et lui seul saute par-dessus les pièces.</li>
+        <li>Le roi se déplace d'une case dans toutes les directions. Il n'y a ni annonce d'échec ni échec et mat : il faut capturer le roi.</li>
+        <li>La tour se déplace normalement. Elle peut aussi capturer une pièce de sa propre couleur.</li>
+        <li>Le fou se déplace normalement, mais peut prolonger ses diagonales hors du plateau et revenir ensuite.</li>
+        <li>La dame se déplace normalement. Chaque joueur est autorisé à déplacer la dame adverse.</li>
+      </ol>
+      <h3>Règles spéciales</h3>
+      <ol start="11">
+        <li>Un pion atteignant la dernière rangée s'élève : il disparaît sans promotion.</li>
+        <li>Après chaque déplacement, un fou laisse une mine sur la case quittée. Une pièce terminant sur une mine est détruite avec elle. Les mines peuvent être traversées mais pas déplacées.</li>
+        <li>Quand une dame capture, toute la position est reflétée horizontalement.</li>
+        <li>Deux tours orthogonalement adjacentes fusionnent immédiatement en château. Celui-ci est immobile, sauf s'il reste au moins trois tours ordinaires.</li>
+        <li>Seuls les fous peuvent sortir du plateau pendant un coup légal.</li>
+        <li>Une seule pièce peut occuper une case.</li>
+        <li>Une dame ne peut pas capturer le roi adverse, sauf avec un coup de vengeance.</li>
+        <li>Quatre cases des rangées centrales sont secrètement glissantes. Une pièce qui s'y arrête tombe ; la relever consomme un tour complet.</li>
+      </ol>
+      <h3>Utilisation de cet outil</h3>
+      <p>Le plateau numérique accompagne votre véritable échiquier. Testez ici la case d'arrivée d'une pièce. Utilisez les autres modes pour mémoriser les mines et les fous sortis du plateau. Toutes les modifications sont conservées automatiquement sur cet appareil.</p>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
