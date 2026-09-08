@@ -5,9 +5,9 @@ const key = (x,y) => `${x},${y}`;
 const inside = (x,y) => x>=0 && x<8 && y>=0 && y<8;
 const other = c => c==='w'?'b':'w';
 const names={p:'Pion',r:'Tour',n:'Cavalier',b:'Fou',q:'Dame',k:'Roi',c:'Château'};
-const rules={owner:'2 — Déplacer une pièce adverse (sauf sa dame)',pawn:'4/6 — Pion : une case orthogonale',knight:'7 — Cavalier : déplacement en L',jump:'9 — Sauter par-dessus une pièce',king:'12 — Roi : une seule case',bishop:'13 — Fou : diagonales',rook:'14 — Tour : lignes et colonnes',queen:'18 — Dame : lignes, colonnes ou diagonales',friend:'23/24 — Capturer une pièce amie sans tour',outside:'25 — Sortir du plateau sans être un fou',mine:'26 — Déplacer une mine',sleep:'27 — Déplacer une pièce couchée',castle:'28 — Déplacer un château',affair:'29 — Dame capturant le roi adverse'};
+const rules={owner:'2 — Déplacer une pièce adverse (sauf sa dame)',pawn:'4/6 — Pion : une case orthogonale',knight:'7 — Cavalier : déplacement en L',jump:'9 — Sauter par-dessus une pièce',king:'12 — Roi : une seule case',bishop:'13 — Fou : diagonales',rook:'14 — Tour : lignes et colonnes',queen:'18 — Dame : lignes, colonnes ou diagonales',friend:'23/24 — Capturer une pièce amie sans tour',outside:'25 — Sortir du plateau sans être un fou',livre:'26 — Déplacer une livre',sleep:'27 — Déplacer une pièce couchée',castle:'28 — Déplacer un château',affair:'29 — Dame capturant le roi adverse'};
 function fresh(random=Math.random){
- let s={version:2,pieces:[],mines:[],ice:[],revealed:[],turn:'w',revenge:false,pending:null,winner:null,logs:[],ascended:{w:0,b:0},ply:0};
+ let s={version:2,pieces:[],livre:[],ice:[],revealed:[],turn:'w',revenge:false,pending:null,winner:null,logs:[],ascended:{w:0,b:0},ply:0};
  const order=['r','n','b','q','k','b','n','r'];let id=0;
  for(const color of ['b','w'])for(let x=0;x<8;x++){
   s.pieces.push({id:++id,type:order[x],color,x,y:color==='b'?0:7,sleep:false});
@@ -20,7 +20,7 @@ function fresh(random=Math.random){
 const at=(s,x,y)=>s.pieces.find(p=>p.x===x&&p.y===y);
 function violations(s,p,x,y){
  const v=[];const dx=Math.abs(x-p.x),dy=Math.abs(y-p.y);const target=at(s,x,y);
- if(p.type==='mine')return ['mine'];
+ if(p.type==='livre')return ['livre'];
  if(p.color!==s.turn && p.type!=='q')v.push('owner');
  if(p.sleep)v.push('sleep');
  if(!inside(x,y)&&p.type!=='b')v.push('outside');
@@ -53,28 +53,28 @@ function settle(s,random){
 }
 function mirror(s){
  s.pieces.forEach(p=>p.x=7-p.x);
- for(const field of ['mines','ice','revealed'])s[field]=s[field].map(k=>{const [x,y]=k.split(',').map(Number);return key(7-x,y);});
+ for(const field of ['livres','ice','revealed'])s[field]=s[field].map(k=>{const [x,y]=k.split(',').map(Number);return key(7-x,y);});
 }
 function move(s,source,x,y,random=Math.random){
  if(s.winner||s.pending?.result)throw Error('Validez ou contestez la fin de partie.');
- const p=source.mine?{type:'mine',x:source.x,y:source.y}:s.pieces.find(p=>p.id===source.id);
+ const p=source.livre?{type:'livre',x:source.x,y:source.y}:s.pieces.find(p=>p.id===source.id);
  if(!p||!Number.isInteger(x)||!Number.isInteger(y)||(p.x===x&&p.y===y))throw Error('Choisissez une autre case.');
- if(source.mine&&!s.mines.includes(key(p.x,p.y)))throw Error('Mine absente.');
+ if(source.livre&&!s.livres.includes(key(p.x,p.y)))throw Error('livre absente.');
  const before=copy(s);before.pending=null;
  const faults=s.revenge?[]:violations(s,p,x,y);const authorized=s.revenge;const actor=s.turn;
  s.pending=null;
- const text=`${actor==='w'?'Blancs':'Noirs'} : ${names[p.type]||'Mine'} ${label(p.x,p.y)} → ${label(x,y)}${authorized?' (vengeance)':''}`;
- if(p.type==='mine'){
-  s.mines=s.mines.filter(k=>k!==key(p.x,p.y));
+ const text=`${actor==='w'?'Blancs':'Noirs'} : ${names[p.type]||'livre'} ${label(p.x,p.y)} → ${label(x,y)}${authorized?' (vengeance)':''}`;
+ if(p.type==='livre'){
+  s.livres=s.livres.filter(k=>k!==key(p.x,p.y));
   const target=at(s,x,y);
   if(target)s.pieces=s.pieces.filter(q=>q.id!==target.id);
-  else if(!s.mines.includes(key(x,y)))s.mines.push(key(x,y));
+  else if(!s.livres.includes(key(x,y)))s.livres.push(key(x,y));
  }else{
   const target=at(s,x,y);const captured=Boolean(target);const wasBishop=p.type==='b';const wasQueen=p.type==='q';
-  if(wasBishop&&!s.mines.includes(key(p.x,p.y)))s.mines.push(key(p.x,p.y));
+  if(wasBishop&&!s.livres.includes(key(p.x,p.y)))s.livres.push(key(p.x,p.y));
   if(target)s.pieces=s.pieces.filter(q=>q.id!==target.id);
   p.x=x;p.y=y;
-  if(s.mines.includes(key(x,y))){s.mines=s.mines.filter(k=>k!==key(x,y));s.pieces=s.pieces.filter(q=>q.id!==p.id);log(s,'Explosion : la pièce et la mine disparaissent.');}
+  if(s.livres.includes(key(x,y))){s.livres=s.livres.filter(k=>k!==key(x,y));s.pieces=s.pieces.filter(q=>q.id!==p.id);log(s,'Explosion : la pièce et la livre disparaissent.');}
   else if(p.type==='p'&&inside(x,y)&&y===(p.color==='w'?0:7)){
    s.ascended[p.color]++;s.pieces=s.pieces.filter(q=>q.id!==p.id);log(s,'Un pion s’élève, sans promotion.');
   }else{
