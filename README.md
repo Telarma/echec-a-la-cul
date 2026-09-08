@@ -1,6 +1,6 @@
-# Échecs à la Troll
+# Échecs à la cul
 
-Version 2 : jeu à deux sur le même écran, inspiré de King of the Bridge. Adaptation non officielle, sans IA ni connexion réseau. Les 32 pièces sont présentes.
+Version 2 : jeu à deux sur le même écran, inspiré d'un jeu sur steam. Adaptation non officielle, sans IA ni connexion réseau. Les 32 pièces sont présentes.
 
 Déposez index.html, style.css, app.js, engine.js et README.md à la racine du dépôt. Gardez GitHub Pages sur main / (root). Aucune compilation nécessaire. Ouvrir index.html directement permet aussi de jouer hors ligne.
 
